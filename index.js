@@ -1,8 +1,9 @@
 // importamos la libreria
 import express from "express"; // es6
 import "dotenv/config";
-import aprendiz from "../api/src/modules/aprendices/aprendiz.routes.js";
-import usuario from "../api/src/modules/auth/auth.routes.js";
+import aprendiz from "../sgaprendiz/src/modules/aprendices/aprendiz.routes.js";
+import usuario from "../sgaprendiz/src/modules/auth/auth.routes.js";
+import ficha from "../sgaprendiz/src/modules/ficha/ficha.routes.js";
 import morgan from "morgan";
 
 import cors from "cors";
@@ -27,6 +28,7 @@ app.use(cors());
 
 app.use("/aprendiz", aprendiz);
 app.use("/usuario", usuario);
+app.use('/ficha',ficha)
 
 app.listen(process.env.PORT, () => {
   console.log(`API ON in port: ${process.env.PORT}`);

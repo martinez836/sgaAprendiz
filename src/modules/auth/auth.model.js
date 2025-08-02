@@ -1,5 +1,6 @@
 import dbconn from "../../config/dbconexion.js";
 import bcrypt from "bcryptjs";
+//implementa la encriptacion con el algoritmo BLOWFISH mas varios giros 
 
 export async function getUsersDB() {
   const [rows] = await dbconn.query("SELECT * FROM user");
@@ -66,7 +67,7 @@ export async function authUserDB(userData) {
   if (consultaRegistro.length > 0) {
     const siCoincide = bcrypt.compareSync(
       password,
-      consultaRegistro.user_password
+      consultaRegistro[0].user_password
     );
     console.log(siCoincide);
     if (siCoincide) {

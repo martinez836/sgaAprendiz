@@ -1,4 +1,3 @@
-
 import dbconn from "../../config/dbconexion.js"; 
 
 export async function getAprendicesDB() {

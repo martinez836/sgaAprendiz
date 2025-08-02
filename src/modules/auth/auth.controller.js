@@ -10,10 +10,10 @@ import {
 export async function getAllUsers(req, res) {
   try {
     const users = await getUsersDB();
-    res.status(200).send({
-      status: "ok",
-      data: users,
-    });
+      res.status(200).send({
+        status: "ok",
+        data: users,
+      });
   } catch (error) {
     res.status(500).send({
       status: "error",
@@ -25,7 +25,7 @@ export async function getAllUsers(req, res) {
 export async function getUserById(id) {
   try {
     const user = await getUserById(id);
-    if (!aprendiz) {
+    if (!user) {
       throw {
         status: "error",
         message: "usuario no encontrado.",
