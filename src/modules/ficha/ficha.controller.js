@@ -21,8 +21,9 @@ export async function getAllFichas(req, res) {
     }
 }
 
-export async function getFichaById(numeroFicha) {
+export async function getFichaById(req, res) {
     try {
+        const numeroFicha = req.params.numeroFicha;
         const ficha = await getFichaByIdDB(numeroFicha);
         if (!ficha) {
             throw {
@@ -61,9 +62,10 @@ export async function createFicha(req, res) {
     }
 }
 
-export async function updateFicha(numeroFicha, data) {
+export async function updateFicha(req,res) {
     try {
-
+        const numeroFicha = req.params.numeroFicha;
+        const data = req.body;
         const result = await updateFichaDB(numeroFicha, data);
         if (result.affectedRows === 0) {
             throw {
@@ -84,8 +86,9 @@ export async function updateFicha(numeroFicha, data) {
     }
 }
 
-export async function deleteFicha(numeroFicha) {
+export async function deleteFicha(req, res) {
     try {
+        const numeroFicha = req.params.numeroFicha;
         const result = await deleteFichaDB(numeroFicha);
         if (result.affectedRows === 0) {
             throw {

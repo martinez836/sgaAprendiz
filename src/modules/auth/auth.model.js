@@ -31,7 +31,7 @@ export async function createUserDB(userData) {
     user_email: userData.user_email,
     user_nombre: userData.user_nombre,
     user_apellido: userData.user_apellido,
-    user_password: bcrypt.hashSync(userData.user_password, 11),
+    user_password: bcrypt.hashSync(password, 11),
     user_telefono: userData.user_telefono,
   };
 
@@ -40,7 +40,7 @@ export async function createUserDB(userData) {
 }
 
 export async function updateUserDB(id, userData) {
-  const [result] = await dbconn.query("UPDATE user SET ? WHERE id = ?", [
+  const [result] = await dbconn.query("UPDATE user SET ? WHERE id_user = ?", [
     userData,
     id,
   ]);
@@ -49,7 +49,7 @@ export async function updateUserDB(id, userData) {
 
 // ejemplo para la formacion: recordar que esto por ley NO se debe hacer
 export async function deleteUserDB(id) {
-  const [result] = await dbconn.query("DELETE FROM user WHERE id = ?", [id]);
+  const [result] = await dbconn.query("DELETE FROM user WHERE id_user = ?", [id]);
   return result;
 }
 
@@ -78,4 +78,8 @@ export async function authUserDB(userData) {
   } else {
     throw new Error("el Usuario no existe en la Base de datos");
   }
+}
+export async function updateImgDB(userdata,id) {
+  const [result] = await dbconn.query("UPDATE user SET user_foto = ? where id_user = ?", [userdata,id])
+  return result;
 }

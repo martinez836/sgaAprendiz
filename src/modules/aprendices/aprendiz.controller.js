@@ -21,9 +21,10 @@ export async function getAllAprendices(req, res) {
   }
 }
 
-export async function getAprendizById(id) {
+export async function getAprendizById(req, res) {
   try {
-    const aprendiz = await getAprendizByIdDB(id);
+    const id = req.params.id;
+    const aprendiz = await getAprendizporIdDB(id);
     if (!aprendiz) {
       throw {
         status: "error",
@@ -68,8 +69,10 @@ export async function createAprendiz(req, res) {
   }
 }
 
-export async function updateAprendiz(id, data) {
+export async function updateAprendiz(req, res) {
   try {
+    const id = req.params.id;
+    let data = req.body;
     const result = await updateAprendizDB(id, data);
     if (result.affectedRows === 0) {
       throw {
@@ -90,8 +93,9 @@ export async function updateAprendiz(id, data) {
   }
 }
 
-export async function deleteAprendiz(id) {
+export async function deleteAprendiz(req, res) {
   try {
+    const id = req.params.id;
     const result = await deleteAprendizDB(id);
     if (result.affectedRows === 0) {
       throw {
